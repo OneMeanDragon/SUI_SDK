@@ -39,12 +39,14 @@ struct MyMessageData // our initialize message
 
 #define WM_MENU_UPDATE              (WM_USER + 1014) // UI->Thread (UI telling point of origin menu command data [Name + id])
 #define WM_MENU_COMMAND             (WM_USER + 1015)
-#define WM_MENU_ADDCOMMANDA         (WM_USER + 1016)
-#define WM_MENU_ADDCOMMANDW         (WM_USER + 1017)
-#define WM_MENU_ADDSUBMENUA         (WM_USER + 1018)
-#define WM_MENU_ADDSUBMENUW         (WM_USER + 1019)
+#define WM_MENU_ADDCOMMANDA         (WM_USER + 1016) // thread->ui add menu command item
+#define WM_MENU_ADDCOMMANDW         (WM_USER + 1017) // thread->ui add menu command item
+#define WM_MENU_ADDSUBMENUA         (WM_USER + 1018) // thread->ui add submenu item
+#define WM_MENU_ADDSUBMENUW         (WM_USER + 1019) // thread->ui add submenu item
 #define WM_MENU_ADDSUBMENUCOMMANDA  (WM_USER + 1020)
 #define WM_MENU_ADDSUBMENUCOMMANDW  (WM_USER + 1021)
+#define WM_MENU_ADDSUBMENUSUBMENUA  (WM_USER + 1022)
+#define WM_MENU_ADDSUBMENUSUBMENUW  (WM_USER + 1023)
 
 #pragma region "COLORS"
 enum class colors : uint32_t {
@@ -348,6 +350,17 @@ struct sAddTextW {
 struct sMessageBoxText {
 	std::string  MessageA{};
 	std::wstring MessageW{};
+};
+#pragma endregion
+
+#pragma region "SUBMENU//COMMAND||SUBMENU"
+struct sSubMenuItemA {
+	std::string submenu{};
+	std::string item{};
+};
+struct sSubMenuItemW {
+	std::wstring submenu{};
+	std::wstring item{};
 };
 #pragma endregion
 

@@ -7,8 +7,11 @@ static std::wstring SdkBuildInformation{};
 #define BASE_SETTINGS TEXT("&Settings")
 // Commands
 #define BASE_TEST TEXT("Test")
+#define BASE_TEST2 TEXT("Test2")
+sSubMenuItemW SETTINGS_TEST = sSubMenuItemW{ BASE_SETTINGS, BASE_TEST2 };
 // command id's
 UINT MENU_TEST{ 0 };
+UINT MENU_SETTINGS_TEST2{ 0 };
 
 #pragma region "Extra Shit"
 const uiString AM_PM(int inBuf)
@@ -51,6 +54,10 @@ void DestroyVars() { /* these vars will mention a memory leak if not destroyed a
 	AddTextArrA.~deque();
 	AddTextArrW.~deque();
 	SdkBuildInformation.~basic_string();
+	{
+		SETTINGS_TEST.submenu.~basic_string();
+		SETTINGS_TEST.item.~basic_string();
+	}
 }
 
 int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPTSTR lpCmdLine, _In_ int nShowCmd) {
@@ -163,9 +170,12 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 							}
 							// Add Menu Items
 							{
-								// Add a sub menu, add a command to the Menu
+								// Add a base sub menu
 								PostThreadMessage(GetThreadId(hThread), WM_MENU_ADDSUBMENUW, 0, reinterpret_cast<LPARAM>(&BASE_SETTINGS));
+								// Add a base command
 								PostThreadMessage(GetThreadId(hThread), WM_MENU_ADDCOMMANDW, 0, reinterpret_cast<LPARAM>(&BASE_TEST));
+								// Add command to sub menu
+								PostThreadMessage(GetThreadId(hThread), WM_MENU_ADDSUBMENUCOMMANDW, 0, reinterpret_cast<LPARAM>(&SETTINGS_TEST));
 							}
 							break;
 						}
@@ -177,6 +187,9 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 							if (menuname->MessageW == std::wstring(BASE_TEST)) {
 								MENU_TEST = msg.wParam;
 							}
+							if (menuname->MessageW == std::wstring(BASE_TEST2)) {
+								MENU_SETTINGS_TEST2 = msg.wParam;
+							}
 							break;
 						}
 						case WM_MENU_COMMAND: {
@@ -184,6 +197,13 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 								sAddTextW testW{};
 								testW.FmtMessage(TEXT("%s"), TimeStamp().c_str());
 								testW.FmtMessage(colors::seagreen, TEXT("%s\r\n"), TEXT("Test menu command was pressed."));
+								AddTextArrW.push_back(testW);
+								PostThreadMessage(GetThreadId(hThread), WM_UIADDTEXTW, 0, reinterpret_cast<LPARAM>(&AddTextArrW.front()));
+							}
+							if (msg.wParam == MENU_SETTINGS_TEST2) {
+								sAddTextW testW{};
+								testW.FmtMessage(TEXT("%s"), TimeStamp().c_str());
+								testW.FmtMessage(colors::darkslategray, TEXT("%s\r\n"), TEXT("Settings->Test2 menu command was pressed."));
 								AddTextArrW.push_back(testW);
 								PostThreadMessage(GetThreadId(hThread), WM_UIADDTEXTW, 0, reinterpret_cast<LPARAM>(&AddTextArrW.front()));
 							}
