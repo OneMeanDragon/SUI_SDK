@@ -43,10 +43,10 @@ struct MyMessageData // our initialize message
 #define WM_MENU_ADDCOMMANDW         (WM_USER + 1017) // thread->ui add menu command item
 #define WM_MENU_ADDSUBMENUA         (WM_USER + 1018) // thread->ui add submenu item
 #define WM_MENU_ADDSUBMENUW         (WM_USER + 1019) // thread->ui add submenu item
-#define WM_MENU_ADDSUBMENUCOMMANDA  (WM_USER + 1020)
-#define WM_MENU_ADDSUBMENUCOMMANDW  (WM_USER + 1021)
-#define WM_MENU_ADDSUBMENUSUBMENUA  (WM_USER + 1022)
-#define WM_MENU_ADDSUBMENUSUBMENUW  (WM_USER + 1023)
+#define WM_MENU_ADDSUBMENUCOMMANDA  (WM_USER + 1020) // thread->ui add submenu command
+#define WM_MENU_ADDSUBMENUCOMMANDW  (WM_USER + 1021) // thread->ui add submenu command
+#define WM_MENU_ADDSUBMENUSUBMENUA  (WM_USER + 1022) // thread->ui add submenu of submenu
+#define WM_MENU_ADDSUBMENUSUBMENUW  (WM_USER + 1023) // thread->ui add submenu of submenu
 
 #pragma region "COLORS"
 enum class colors : uint32_t {
