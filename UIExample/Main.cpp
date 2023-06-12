@@ -2,8 +2,12 @@
 
 static std::wstring SdkBuildInformation{};
 
-#define BASE_FILE TEXT("File")
+// Sub Menus
+#define BASE_FILE TEXT("&File")
+#define BASE_SETTINGS TEXT("&Settings")
+// Commands
 #define BASE_TEST TEXT("Test")
+// command id's
 UINT MENU_TEST{ 0 };
 
 #pragma region "Extra Shit"
@@ -159,7 +163,8 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 							}
 							// Add Menu Items
 							{
-								// Add Test to the Menu
+								// Add a sub menu, add a command to the Menu
+								PostThreadMessage(GetThreadId(hThread), WM_MENU_ADDSUBMENUW, 0, reinterpret_cast<LPARAM>(&BASE_SETTINGS));
 								PostThreadMessage(GetThreadId(hThread), WM_MENU_ADDCOMMANDW, 0, reinterpret_cast<LPARAM>(&BASE_TEST));
 							}
 							break;
