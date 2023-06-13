@@ -20,7 +20,7 @@ struct MyMessageData // our initialize message
 };
 #pragma endregion
 
-#define WM_MY_MESSAGE        (WM_USER + 1001) //main thread giving its info for initialization
+#define WM_INITIALIZE        (WM_USER + 1001) //main thread giving its info for initialization
 #define WM_MYUI_MESSAGE      (WM_USER + 1002) //ui to gui
 #define WM_UIINITIALIZED     (WM_USER + 1003) //ui telling the main thread its up and running
 #define WM_UIINITIALIZED_ACK (WM_USER + 1004) //main thread acknoledging the init

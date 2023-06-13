@@ -107,7 +107,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 				BOOL result = FALSE;
 				while (!result) { /* because our ui thread dosent become available immediatly */
 					Sleep(10);
-					result = PostThreadMessage(GetThreadId(hThread), WM_MY_MESSAGE, 0, reinterpret_cast<LPARAM>(&data));
+					result = PostThreadMessage(GetThreadId(hThread), WM_INITIALIZE, 0, reinterpret_cast<LPARAM>(&data));
 				}
 				WaitForSingleObject(hEvent, INFINITE);
 				CloseHandle(hEvent); /* our initalization is done */
@@ -136,7 +136,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 						break; /* this breaks the while loop our UI exited, only reason quit and destroy are out side the switch statement */
 					}
 					switch (msg.message) {
-						case WM_MY_MESSAGE: {
+						case WM_INITIALIZE: {
 							OutputDebugString(TEXT("event message\r\n"));
 							break;
 						}
