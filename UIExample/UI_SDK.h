@@ -10,7 +10,7 @@
 	check that the WM_ messages are still relevent
 
 */
-#define UISDK_VERSION 3
+#define UISDK_VERSION 4
 
 #pragma region "Init message"
 struct MyMessageData // our initialize message
@@ -47,6 +47,9 @@ struct MyMessageData // our initialize message
 #define WM_MENU_ADDSUBMENUCOMMANDW  (WM_USER + 1021) // thread->ui add submenu command
 #define WM_MENU_ADDSUBMENUSUBMENUA  (WM_USER + 1022) // thread->ui add submenu of submenu
 #define WM_MENU_ADDSUBMENUSUBMENUW  (WM_USER + 1023) // thread->ui add submenu of submenu
+
+#define WM_WINDOW_CAPTIONA          (WM_USER + 1024) // thread->ui set window caption
+#define WM_WINDOW_CAPTIONW          (WM_USER + 1025) // thread->ui set window caption
 
 #pragma region "COLORS"
 enum class colors : uint32_t {

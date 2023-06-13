@@ -22,6 +22,10 @@ UINT MENU_TEST{ 0 };
 UINT MENU_SETTINGS_TEST2{ 0 };
 UINT XMENU_SETTINGS_XTEST{ 0 };
 
+// Window Caption
+#define BASE_CAPTION TEXT("Window Caption Text")
+
+
 #pragma region "Extra Shit"
 const uiString AM_PM(int inBuf)
 {
@@ -193,6 +197,10 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 								PostThreadMessage(GetThreadId(hThread), WM_MENU_ADDSUBMENUSUBMENUW, 0, reinterpret_cast<LPARAM>(&XSETTINGS_TEST));
 								// Add command of a submenu->submenu
 								PostThreadMessage(GetThreadId(hThread), WM_MENU_ADDSUBMENUCOMMANDW, 0, reinterpret_cast<LPARAM>(&SETTINGS_XTEST));
+							}
+							// Set window caption
+							{
+								PostThreadMessage(GetThreadId(hThread), WM_WINDOW_CAPTIONW, 0, reinterpret_cast<LPARAM>(&BASE_CAPTION));
 							}
 							break;
 						}
