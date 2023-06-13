@@ -82,7 +82,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 	//Load the application icon. (unless you want the default Icon)
-	//HICON Application_Icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
+	HICON Application_Icon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_ICON1));
 
 	// Setup the UIInterface DLL
 	DWORD(WINAPI * InterfaceVersion)(VOID)           = 0;      // Predefined UiSdkVersion Function
@@ -100,7 +100,7 @@ int WINAPI wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
 			SdkBuildInformation = BuildInf();
 		}
 		if (InterfaceFun && (SdkVer == UISDK_VERSION)) {
-			HANDLE hThread = CreateThread(NULL, 0, InterfaceFun, NULL /* NULL = default icon, (LPVOID)Application_Icon = our main thread icon */, 0, NULL);
+			HANDLE hThread = CreateThread(NULL, 0, InterfaceFun, (LPVOID)Application_Icon /* NULL = default icon, (LPVOID)Application_Icon = our main thread icon */, 0, NULL);
 			HANDLE hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 			MyMessageData data = { hEvent, GetCurrentThreadId() /* message data */ };
 			if (hThread != INVALID_HANDLE_VALUE && hThread != nullptr && hEvent != INVALID_HANDLE_VALUE && hEvent != nullptr) {
