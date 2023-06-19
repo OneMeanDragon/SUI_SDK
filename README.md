@@ -6,5 +6,5 @@ SDK to my standard user interface.
   - ESC || X: will close the SDL2 interface.
   - ..
 
-### About the menu
+### About the menu (Interface.SUI only)
   - Menu items including the submenu names currently must have a unique name.
