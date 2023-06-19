@@ -1,7 +1,10 @@
 # SUI_SDK
 SDK to my standard user interface.
 
-## GfxInterface.SUI & its Example
+## Interface.SUI & its Example
+  - is mainly what this repo is for.
+
+## GfxInterface.SUI & its Example (these are here just to be here)
   - Currently does nothing but create the SDL2 window
   - ESC || X: will close the SDL2 interface.
   - ..
